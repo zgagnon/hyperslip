@@ -1,4 +1,4 @@
-import typography from "../src/stories/typography";
+import typography from "../src/design-system/typography";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

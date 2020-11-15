@@ -12,7 +12,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-typography`,
       options: {
-        pathToConfigModule: `src/stories/typography`,
+        pathToConfigModule: `src/design-system/typography`,
       },
     },
     {

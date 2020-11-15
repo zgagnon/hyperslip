@@ -8,7 +8,7 @@ import {
   Tags,
   TextProps,
   Title,
-} from "./Text";
+} from "../design-system/Text";
 
 export default {
   title: "Example/Text Input",

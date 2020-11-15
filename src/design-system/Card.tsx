@@ -2,10 +2,11 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
 
-import React from "react";
+import KeyboardEventHandler from "react-keyboard-event-handler";
+import React, { useEffect, useState } from "react";
 import facepaint from "facepaint";
 import { darkAccent, primaryColor } from "./colors";
-import { NoteDisplay, Tags, Title } from "./Text";
+import { NoteDisplay, NoteInput, Tags, Title } from "./Text";
 
 export interface CardProps {
   title: string;
@@ -58,11 +59,39 @@ const CardTagSection: React.FC<{ tags: string[] }> = ({ tags }) => {
   );
 };
 export const Card: React.FC<CardProps> = (props) => {
+  const [editable, setEditable] = useState(false);
+  const [content, setContent] = useState(props.note);
+  const noteSection = editable ? (
+    <NoteInput
+      content={content}
+      onBlur={() => {
+        setEditable(false);
+      }}
+      onDone={(note) => {
+        setContent(note);
+        setEditable(false);
+      }}
+    />
+  ) : (
+    <NoteDisplay content={content} />
+  );
   return (
-    <div css={CardStyle}>
-      <CardTitleSection id={props.id}>{props.title}</CardTitleSection>
-      <NoteDisplay content={props.note} />
-      <CardTagSection tags={props.tags ?? []} />
-    </div>
+    <KeyboardEventHandler
+      handleKeys={["e", "esc"]}
+      handleEventType="keyup"
+      onKeyEvent={(key: string) => {
+        switch (key) {
+          case "e":
+            setEditable(true);
+            break;
+        }
+      }}
+    >
+      <section css={CardStyle} aria-label={props.title} tabIndex={1}>
+        <CardTitleSection id={props.id}>{props.title}</CardTitleSection>
+        {noteSection}
+        <CardTagSection tags={props.tags ?? []} />
+      </section>
+    </KeyboardEventHandler>
   );
 };

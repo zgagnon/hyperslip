@@ -1,6 +1,6 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react/";
-import { Card, CardProps } from "./Card";
+import { Card, CardProps } from "../design-system/Card";
 
 export default {
   title: "Example/Card",
