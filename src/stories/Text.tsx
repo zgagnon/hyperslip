@@ -3,10 +3,7 @@ import { css } from "@emotion/react";
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
-import { darkAccent } from "./colors";
 import { TagLink } from "./Links";
-
-export interface TextProps {}
 
 export interface NoteProps {
   content: string;
@@ -23,7 +20,7 @@ const TitleStyles = css({
   fontSize: 22,
 });
 
-export const Title: React.FC<TextProps> = ({ children }) => {
+export const Title: React.FC = ({ children }) => {
   return <div css={css(TitleStyles)}>{children}</div>;
 };
 
@@ -32,6 +29,6 @@ export interface TagProps {
 }
 
 export const Tags: React.FC<TagProps> = ({ tags }) => {
-  const links = tags.map((tag) => <TagLink>{tag}</TagLink>);
+  const links = tags.map((tag) => <TagLink key={tag}>{tag}</TagLink>);
   return <div>{links}</div>;
 };
